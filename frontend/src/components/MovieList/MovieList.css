@@ -1,0 +1,61 @@
+.movie-list ul {
+    padding: 0;
+    margin: 20px -20px;
+    list-style: none;
+}
+
+.movie-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: auto;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
+    list-style-type: none;
+}
+
+.movie-list li:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.movie-list li:hover {
+    background-color: #dbe4f8;
+}
+
+.movie-list button {
+    background-color: #fff;
+    color: red;
+    border: 1px solid red;
+    padding: 8px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.movie-list button:hover {
+    background-color: #fdd;
+}
+
+.movie-list .highlight {
+    background-color: #ff0;
+}
+
+.movie-list .movie-info {
+    flex: 1;
+    text-align: left;
+}
+
+.movie-list .movie-actions {
+    display: flex;
+    align-items: center;
+}
+
+.movie-list .star-icon {
+    width: 24px;
+    height: 24px;
+    margin: 0 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    color: #fca510;
+}
