@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteMovie } from '../../redux/Movies/actionCreators';
+import { BsBookmarkCheck, BsBookmarkCheckFill } from 'react-icons/bs';
+import { deleteMovie, toggleFavorite } from '../../redux/Movies/actionCreators';
 import './MovieList.css';
 
 const MovieList = () => {
@@ -8,6 +9,10 @@ const MovieList = () => {
 
     const handleDeleteBtn = (id) => {
         dispatch(deleteMovie(id));
+    };
+
+    const handleFavoriteMovie = (id) => {
+        dispatch(toggleFavorite(id));
     };
 
     return (
@@ -31,6 +36,18 @@ const MovieList = () => {
                                 <strong>{movie.director}</strong>
                             </div>
                             <div className="movie-actions">
+                                <span
+                                    className="favorite-icon"
+                                    onClick={() =>
+                                        handleFavoriteMovie(movie.id)
+                                    }
+                                >
+                                    {movie.isFavorite ? (
+                                        <BsBookmarkCheckFill />
+                                    ) : (
+                                        <BsBookmarkCheck />
+                                    )}
+                                </span>
                                 <button
                                     type="button"
                                     onClick={() => handleDeleteBtn(movie.id)}

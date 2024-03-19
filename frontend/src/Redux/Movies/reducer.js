@@ -10,6 +10,13 @@ const moviesReducer = (state = initialState, action) => {
         case a.DELETE_MOVIE:
             return state.filter((movie) => movie.id !== action.payload);
 
+        case a.TOGGLE_FAVORITE:
+            return state.map((movie) =>
+                movie.id === action.payload
+                    ? { ...movie, isFavorite: !movie.isFavorite }
+                    : movie
+            );
+
         default:
             return state;
     }

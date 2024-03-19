@@ -15,7 +15,12 @@ const MovieForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (title && director) {
-            const newMovie = { title, director, id: uuidv4() };
+            const newMovie = {
+                title,
+                director,
+                isFavorite: false,
+                id: uuidv4(),
+            };
             dispatch(addMovie(newMovie));
 
             setTitle('');
@@ -28,6 +33,7 @@ const MovieForm = () => {
         const randomMovie = moviesData[randomIndex];
         const randomMovieWithID = {
             ...randomMovie,
+            isFavorite: false,
             id: uuidv4(),
         };
 
