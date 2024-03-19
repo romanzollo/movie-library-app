@@ -18,7 +18,7 @@
 }
 
 .movie-form button {
-    background-color: #007bff;
+    background-color: #523634;
     color: #fff;
     padding: 8px 12px;
     border: none;
@@ -29,7 +29,7 @@
 }
 
 .movie-form button:hover {
-    background-color: #0056b3;
+    background-color: #b6452c;
 }
 
 .movie-form .spinner {
