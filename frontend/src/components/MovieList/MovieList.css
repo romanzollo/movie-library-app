@@ -44,6 +44,15 @@
 .movie-list .movie-info {
     flex: 1;
     text-align: left;
+    padding: 10px;
+}
+
+.movie-poster {
+    margin-right: 15px;
+}
+
+.movie-poster img {
+    width: 5rem;
 }
 
 .movie-list .movie-actions {
@@ -58,4 +67,16 @@
     cursor: pointer;
     transition: color 0.3s ease;
     color: #fca510;
+}
+
+@media screen and (max-width: 600px) {
+    .movie-list li {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .movie-list .movie-info {
+        text-align: center;
+        margin-bottom: 3px;
+    }
 }

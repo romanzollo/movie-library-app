@@ -19,12 +19,20 @@ const MovieList = () => {
                 <ul>
                     {movies.map((movie, i) => (
                         <li key={movie.id}>
+                            {movie.poster ? (
+                                <div className="movie-poster">
+                                    <img src={movie.poster} alt={movie.title} />
+                                </div>
+                            ) : (
+                                ''
+                            )}
                             <div className="movie-info">
                                 {++i}. {movie.title} by{' '}
                                 <strong>{movie.director}</strong>
                             </div>
                             <div className="movie-actions">
                                 <button
+                                    type="button"
                                     onClick={() => handleDeleteBtn(movie.id)}
                                 >
                                     Delete

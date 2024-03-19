@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { addMovie } from '../../redux/Movies/actionCreators';
+import moviesData from '../../data/movies.json';
 import { v4 as uuidv4 } from 'uuid';
 
 import './MovieForm.css';
@@ -21,6 +22,18 @@ const MovieForm = () => {
             setDirector('');
         }
     };
+
+    const handleRandomMovieBtn = () => {
+        const randomIndex = Math.floor(Math.random() * moviesData.length);
+        const randomMovie = moviesData[randomIndex];
+        const randomMovieWithID = {
+            ...randomMovie,
+            id: uuidv4(),
+        };
+
+        dispatch(addMovie(randomMovieWithID));
+    };
+
     return (
         <div className="app-block movie-form">
             <h2>Add a New Movie</h2>
@@ -44,6 +57,9 @@ const MovieForm = () => {
                     />
                 </div>
                 <button type="submit">Add Movie</button>
+                <button type="button" onClick={handleRandomMovieBtn}>
+                    Add Random Movie
+                </button>
             </form>
         </div>
     );
