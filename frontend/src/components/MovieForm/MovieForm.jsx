@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { addMovie } from '../../redux/Movies/actionCreators';
+import createMovieWithID from '../../utils/createMovieWithID';
 import moviesData from '../../data/movies.json';
-import { v4 as uuidv4 } from 'uuid';
 
 import './MovieForm.css';
 
@@ -15,12 +15,7 @@ const MovieForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (title && director) {
-            const newMovie = {
-                title,
-                director,
-                isFavorite: false,
-                id: uuidv4(),
-            };
+            const newMovie = createMovieWithID({ title, director });
             dispatch(addMovie(newMovie));
 
             setTitle('');
@@ -31,13 +26,8 @@ const MovieForm = () => {
     const handleRandomMovieBtn = () => {
         const randomIndex = Math.floor(Math.random() * moviesData.length);
         const randomMovie = moviesData[randomIndex];
-        const randomMovieWithID = {
-            ...randomMovie,
-            isFavorite: false,
-            id: uuidv4(),
-        };
 
-        dispatch(addMovie(randomMovieWithID));
+        dispatch(addMovie(createMovieWithID(randomMovie)));
     };
 
     return (
