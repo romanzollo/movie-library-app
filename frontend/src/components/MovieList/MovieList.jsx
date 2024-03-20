@@ -1,15 +1,24 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { BsBookmarkCheck, BsBookmarkCheckFill } from 'react-icons/bs';
 import { deleteMovie, toggleFavorite } from '../../redux/Movies/actionCreators';
+import { selectTitleFilter } from '../../redux/slices/filterSlice';
 import './MovieList.css';
 
 const MovieList = () => {
     const movies = useSelector((state) => state.movies);
+    const filterTitle = useSelector(selectTitleFilter);
     const dispatch = useDispatch();
 
     const handleDeleteBtn = (id) => {
         dispatch(deleteMovie(id));
     };
+
+    const filteredMovies = movies.filter((movie) => {
+        const matchesTitle = movie.title
+            .toLowerCase()
+            .includes(filterTitle.toLowerCase());
+        return matchesTitle;
+    });
 
     const handleFavoriteMovie = (id) => {
         dispatch(toggleFavorite(id));
@@ -22,7 +31,7 @@ const MovieList = () => {
                 <p>No movies found</p>
             ) : (
                 <ul>
-                    {movies.map((movie, i) => (
+                    {filteredMovies.map((movie, i) => (
                         <li key={movie.id}>
                             {movie.poster ? (
                                 <div className="movie-poster">
