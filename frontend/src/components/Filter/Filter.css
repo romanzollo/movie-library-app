@@ -17,7 +17,7 @@
 }
 
 .filter button {
-    background-color: #007bff;
+    background-color: #523634;
     color: #fff;
     padding: 8px 12px;
     border: none;
@@ -28,7 +28,11 @@
 }
 
 .filter button:hover {
-    background-color: #0056b3;
+    background-color: #b6452c;
+}
+
+.css-1373o7r-MuiFormControlLabel-root .MuiFormControlLabel-label {
+    font-family: inherit;
 }
 
 @media screen and (max-width: 1024px) {

@@ -1,15 +1,20 @@
+import { Checkbox, FormControlLabel } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     setTitleFilter,
     setDirectorFilter,
+    setOnlyFavoriteFilter,
+    resetFilters,
     selectTitleFilter,
     selectDirectorFilter,
+    selectOnlyFavoriteFilter,
 } from '../../redux/slices/filterSlice';
 import './Filter.css';
 
 const Filter = () => {
     const titleFilter = useSelector(selectTitleFilter);
     const directorFilter = useSelector(selectDirectorFilter);
+    const onlyFavoriteFilter = useSelector(selectOnlyFavoriteFilter);
     const dispatch = useDispatch();
 
     const handleFilterTitleChange = (e) => {
@@ -18,6 +23,14 @@ const Filter = () => {
 
     const handleFilterDirectorChange = (e) => {
         dispatch(setDirectorFilter(e.target.value));
+    };
+
+    const handleOnlyFavoriteFilterChange = () => {
+        dispatch(setOnlyFavoriteFilter());
+    };
+
+    const handleResetFilters = () => {
+        dispatch(resetFilters());
     };
 
     return (
@@ -39,6 +52,35 @@ const Filter = () => {
                         value={directorFilter}
                     />
                 </div>
+                <div className="filter-group">
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                size="small"
+                                sx={{
+                                    color: '#523634',
+                                    '&.Mui-checked': {
+                                        color: '#523634',
+                                    },
+                                }}
+                            />
+                        }
+                        label="Only Favorite"
+                        onChange={handleOnlyFavoriteFilterChange}
+                        checked={onlyFavoriteFilter}
+                    />
+                    {/* <label>
+                        <input
+                            type="checkbox"
+                            onChange={handleOnlyFavoriteFilterChange}
+                            checked={onlyFavoriteFilter}
+                        />
+                        Only Favorite
+                    </label> */}
+                </div>
+                <button type="button" onClick={handleResetFilters}>
+                    Reset Filters
+                </button>
             </div>
         </div>
     );

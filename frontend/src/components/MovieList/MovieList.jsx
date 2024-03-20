@@ -3,14 +3,16 @@ import { BsBookmarkCheck, BsBookmarkCheckFill } from 'react-icons/bs';
 import { deleteMovie, toggleFavorite } from '../../redux/Movies/actionCreators';
 import {
     selectTitleFilter,
-    setDirectorFilter,
+    selectDirectorFilter,
+    selectOnlyFavoriteFilter,
 } from '../../redux/slices/filterSlice';
 import './MovieList.css';
 
 const MovieList = () => {
     const movies = useSelector((state) => state.movies);
     const filterTitle = useSelector(selectTitleFilter);
-    const filterDirector = useSelector((state) => state.filter.director);
+    const filterDirector = useSelector(selectDirectorFilter);
+    const filterOnlyFavorite = useSelector(selectOnlyFavoriteFilter);
     const dispatch = useDispatch();
 
     const handleDeleteBtn = (id) => {
@@ -26,7 +28,11 @@ const MovieList = () => {
             .toLowerCase()
             .includes(filterDirector.toLowerCase());
 
-        return matchesTitle && matchesDirector;
+        const matchesOnlyFavorite = filterOnlyFavorite
+            ? movie.isFavorite
+            : true;
+
+        return matchesTitle && matchesDirector && matchesOnlyFavorite;
     });
 
     const handleFavoriteMovie = (id) => {
