@@ -45,6 +45,24 @@ const MovieList = () => {
         dispatch(toggleFavorite(id));
     };
 
+    // функция для подсветки совпадений текста
+    const highlightMatch = (text, filter) => {
+        if (!filter) return text;
+
+        const regex = new RegExp(`(${filter})`, 'gi');
+
+        return text.split(regex).map((substring, i) => {
+            if (substring.toLowerCase() === filter.toLowerCase()) {
+                return (
+                    <span key={i} className="highlight">
+                        {substring}
+                    </span>
+                );
+            }
+            return substring;
+        });
+    };
+
     return (
         <div className="app-block movie-list">
             <h2>Movie List</h2>
@@ -62,8 +80,14 @@ const MovieList = () => {
                                 ''
                             )}
                             <div className="movie-info">
-                                {++i}. {movie.title} by{' '}
-                                <strong>{movie.director}</strong>
+                                {++i}.{' '}
+                                {highlightMatch(movie.title, filterTitle)} by{' '}
+                                <strong>
+                                    {highlightMatch(
+                                        movie.director,
+                                        filterDirector
+                                    )}
+                                </strong>
                             </div>
                             <div className="movie-actions">
                                 <span
