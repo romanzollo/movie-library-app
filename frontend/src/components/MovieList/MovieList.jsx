@@ -1,6 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { BsBookmarkCheck, BsBookmarkCheckFill } from 'react-icons/bs';
-import { deleteMovie, toggleFavorite } from '../../redux/Movies/actionCreators';
+import {
+    deleteMovie,
+    toggleFavorite,
+    selectMovies,
+} from '../../redux/slices/movieSlice';
 import {
     selectTitleFilter,
     selectDirectorFilter,
@@ -9,10 +13,12 @@ import {
 import './MovieList.css';
 
 const MovieList = () => {
-    const movies = useSelector((state) => state.movies);
+    const movies = useSelector(selectMovies);
+
     const filterTitle = useSelector(selectTitleFilter);
     const filterDirector = useSelector(selectDirectorFilter);
     const filterOnlyFavorite = useSelector(selectOnlyFavoriteFilter);
+
     const dispatch = useDispatch();
 
     const handleDeleteBtn = (id) => {

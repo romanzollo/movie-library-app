@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { addMovie } from '../../redux/Movies/actionCreators';
+import { addMovie } from '../../redux/slices/movieSlice';
 import createMovieWithID from '../../utils/createMovieWithID';
 import moviesData from '../../data/movies.json';
 
