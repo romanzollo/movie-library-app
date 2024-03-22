@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { FaSpinner } from 'react-icons/fa';
 
 import { addMovie, fetchMovie } from '../../redux/slices/movieSlice';
 import { setError } from '../../redux/slices/errorSlice';
@@ -11,6 +12,7 @@ import './MovieForm.css';
 const MovieForm = () => {
     const [title, setTitle] = useState('');
     const [director, setDirector] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
@@ -34,8 +36,15 @@ const MovieForm = () => {
     };
 
     // добавляем фильм через API
-    const handleAddRandomMovieViaAPI = () => {
-        dispatch(fetchMovie('http://localhost:40001/random-movie'));
+    const handleAddRandomMovieViaAPI = async () => {
+        try {
+            setIsLoading(true);
+            await dispatch(
+                fetchMovie('http://localhost:4000/random-movie-delayed')
+            );
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -64,8 +73,19 @@ const MovieForm = () => {
                 <button type="button" onClick={handleRandomMovieBtn}>
                     Add Random Movie
                 </button>
-                <button type="button" onClick={handleAddRandomMovieViaAPI}>
-                    Add Random via API
+                <button
+                    type="button"
+                    onClick={handleAddRandomMovieViaAPI}
+                    disabled={isLoading}
+                >
+                    {isLoading ? (
+                        <>
+                            <span>Movie is Loading...</span>
+                            <FaSpinner className="spinner" />
+                        </>
+                    ) : (
+                        'Add Random via API'
+                    )}
                 </button>
             </form>
         </div>
