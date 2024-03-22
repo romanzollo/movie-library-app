@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { addMovie, thunkFunction } from '../../redux/slices/movieSlice';
+import { addMovie, fetchMovie } from '../../redux/slices/movieSlice';
 import createMovieWithID from '../../utils/createMovieWithID';
 import moviesData from '../../data/movies.json';
 
@@ -32,7 +32,7 @@ const MovieForm = () => {
 
     // добавляем фильм через API
     const handleAddRandomMovieViaAPI = () => {
-        dispatch(thunkFunction);
+        dispatch(fetchMovie('http://localhost:4000/random-movie'));
     };
 
     return (
