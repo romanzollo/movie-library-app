@@ -47,6 +47,10 @@
     padding: 10px;
 }
 
+.source {
+    margin-left: 3px;
+}
+
 .movie-poster {
     margin-right: 15px;
     height: 118px;

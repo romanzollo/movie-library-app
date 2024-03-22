@@ -1,6 +1,7 @@
 import MovieForm from './components/MovieForm/MovieForm';
 import MovieList from './components/MovieList/MovieList';
 import Filter from './components/Filter/Filter';
+import Error from './components/Error/Error';
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
                     <MovieList />
                 </div>
             </main>
+            <Error />
         </div>
     );
 }

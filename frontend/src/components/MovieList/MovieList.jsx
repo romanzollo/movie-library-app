@@ -88,7 +88,7 @@ const MovieList = () => {
                                         filterDirector
                                     )}
                                 </strong>{' '}
-                                <span>({movie.source})</span>
+                                <span className="source">({movie.source})</span>
                             </div>
                             <div className="movie-actions">
                                 <span

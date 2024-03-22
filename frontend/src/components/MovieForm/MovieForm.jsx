@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { addMovie, fetchMovie } from '../../redux/slices/movieSlice';
+import { setError } from '../../redux/slices/errorSlice';
 import createMovieWithID from '../../utils/createMovieWithID';
 import moviesData from '../../data/movies.json';
 
@@ -20,6 +21,8 @@ const MovieForm = () => {
 
             setTitle('');
             setDirector('');
+        } else {
+            dispatch(setError('Please enter title and director'));
         }
     };
 
@@ -32,7 +35,11 @@ const MovieForm = () => {
 
     // добавляем фильм через API
     const handleAddRandomMovieViaAPI = () => {
-        dispatch(fetchMovie('http://localhost:4000/random-movie'));
+        try {
+            dispatch(fetchMovie('http://localhost:4000/random-movie'));
+        } catch (error) {
+            dispatch(setError(error.message));
+        }
     };
 
     return (
