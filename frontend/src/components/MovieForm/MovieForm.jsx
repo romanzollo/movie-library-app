@@ -35,11 +35,7 @@ const MovieForm = () => {
 
     // добавляем фильм через API
     const handleAddRandomMovieViaAPI = () => {
-        try {
-            dispatch(fetchMovie('http://localhost:4000/random-movie'));
-        } catch (error) {
-            dispatch(setError(error.message));
-        }
+        dispatch(fetchMovie('http://localhost:40001/random-movie'));
     };
 
     return (

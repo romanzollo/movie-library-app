@@ -10,7 +10,12 @@ const Error = () => {
 
     useEffect(() => {
         if (errorMessage) {
-            toast.info(errorMessage);
+            toast.warn(errorMessage, {
+                closeOnClick: true,
+                progressStyle: {
+                    // backgroundColor: '#523634',
+                },
+            });
             dispatch(clearError());
         }
     }, [errorMessage, dispatch]);

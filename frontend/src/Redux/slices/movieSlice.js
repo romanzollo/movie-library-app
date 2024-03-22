@@ -1,13 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import createMovieWithID from '../../utils/createMovieWithID';
+import { setError } from './errorSlice';
 
 const initialState = [];
 
-export const fetchMovie = createAsyncThunk('movies/fetchMovie', async (url) => {
-    const res = await axios.get(url);
-    return res.data;
-});
+export const fetchMovie = createAsyncThunk(
+    'movies/fetchMovie',
+    async (url, thunkAPI) => {
+        try {
+            const res = await axios.get(url);
+            return res.data;
+        } catch (error) {
+            thunkAPI.dispatch(setError(error.message));
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+);
 
 const movieSlice = createSlice({
     name: 'movies',
