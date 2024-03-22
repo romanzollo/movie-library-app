@@ -16,7 +16,7 @@ const MovieForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (title && director) {
-            const newMovie = createMovieWithID({ title, director });
+            const newMovie = createMovieWithID({ title, director }, 'manual');
             dispatch(addMovie(newMovie));
 
             setTitle('');
@@ -28,7 +28,7 @@ const MovieForm = () => {
         const randomIndex = Math.floor(Math.random() * moviesData.length);
         const randomMovie = moviesData[randomIndex];
 
-        dispatch(addMovie(createMovieWithID(randomMovie)));
+        dispatch(addMovie(createMovieWithID(randomMovie, 'random')));
     };
 
     // добавляем фильм через API
@@ -37,7 +37,7 @@ const MovieForm = () => {
             const res = await axios.get('http://localhost:4000/random-movie');
 
             if (/* или res.data &&*/ res?.data?.title && res?.data?.director) {
-                const newMovie = createMovieWithID(res.data);
+                const newMovie = createMovieWithID(res.data, 'API');
                 dispatch(addMovie(newMovie));
             }
         } catch (error) {
