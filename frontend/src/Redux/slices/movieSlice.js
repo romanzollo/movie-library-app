@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+import createMovieWithID from '../../utils/createMovieWithID';
 
 const initialState = [];
 
@@ -32,6 +34,20 @@ const movieSlice = createSlice({
 });
 
 export const { addMovie, deleteMovie, toggleFavorite } = movieSlice.actions;
+
+export const thunkFunction = async (dispatch, getState) => {
+    try {
+        const res = await axios.get('http://localhost:4000/random-movie');
+        if (
+            /* можно и с res.data &&  */ res?.data?.title &&
+            res?.data?.director
+        ) {
+            dispatch(addMovie(createMovieWithID(res.data, 'API')));
+        }
+    } catch (error) {
+        console.log('Error fetching random movie via API: ', error);
+    }
+};
 
 export const selectMovies = (state) => state.movies;
 
