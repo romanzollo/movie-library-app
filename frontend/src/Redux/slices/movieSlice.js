@@ -3,7 +3,10 @@ import axios from 'axios';
 import createMovieWithID from '../../utils/createMovieWithID';
 import { setError } from './errorSlice';
 
-const initialState = [];
+const initialState = {
+    movies: [],
+    isLoadingViaAPI: false,
+};
 
 export const fetchMovie = createAsyncThunk(
     'movies/fetchMovie',
@@ -23,14 +26,19 @@ const movieSlice = createSlice({
     initialState,
     reducers: {
         addMovie: (state, action) => {
-            state.push(action.payload);
+            state.movies.push(action.payload);
         },
         deleteMovie: (state, action) => {
-            return state.filter((book) => book.id !== action.payload);
+            return {
+                ...state,
+                movies: state.movies.filter(
+                    (movie) => movie.id !== action.payload
+                ),
+            };
         },
         toggleFavorite: (state, action) => {
             // через мутацию
-            state.forEach((movie) => {
+            state.movies.forEach((movie) => {
                 if (movie.id === action.payload) {
                     movie.isFavorite = !movie.isFavorite;
                 }
@@ -46,16 +54,25 @@ const movieSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
+        builder.addCase(fetchMovie.pending, (state) => {
+            state.isLoadingViaAPI = true;
+        });
         builder.addCase(fetchMovie.fulfilled, (state, action) => {
+            state.isLoadingViaAPI = false;
             if (action.payload.title && action.payload.director) {
-                state.push(createMovieWithID(action.payload, 'API'));
+                state.movies.push(createMovieWithID(action.payload, 'API'));
             }
+        });
+
+        builder.addCase(fetchMovie.rejected, (state) => {
+            state.isLoadingViaAPI = false;
         });
     },
 });
 
 export const { addMovie, deleteMovie, toggleFavorite } = movieSlice.actions;
 
-export const selectMovies = (state) => state.movies;
+export const selectMovies = (state) => state.movies.movies;
+export const selectIsLoadingViaAPI = (state) => state.movies.isLoadingViaAPI;
 
 export default movieSlice.reducer;
