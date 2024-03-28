@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/movie-library-app/static/css/main.d5f2a031.css",
-    "main.js": "/movie-library-app/static/js/main.d25c6490.js",
+    "main.js": "/movie-library-app/static/js/main.6ea781f6.js",
     "index.html": "/movie-library-app/index.html",
     "main.d5f2a031.css.map": "/movie-library-app/static/css/main.d5f2a031.css.map",
-    "main.d25c6490.js.map": "/movie-library-app/static/js/main.d25c6490.js.map"
+    "main.6ea781f6.js.map": "/movie-library-app/static/js/main.6ea781f6.js.map"
   },
   "entrypoints": [
     "static/css/main.d5f2a031.css",
-    "static/js/main.d25c6490.js"
+    "static/js/main.6ea781f6.js"
   ]
 }
